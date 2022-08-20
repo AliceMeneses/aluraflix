@@ -1,0 +1,7 @@
+CREATE TABLE videos (
+	id INT NOT NULL,
+	titulo VARCHAR(150) NOT NULL,
+	descricao VARCHAR(400) NOT NULL,
+	url VARCHAR(700) NOT NULL,
+	PRIMARY KEY(id)
+);
