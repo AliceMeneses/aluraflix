@@ -1,5 +1,7 @@
 package com.alura.aluraflix.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,5 +30,10 @@ public class VideoController {
 			return ResponseEntity.notFound().build();
 		}
 		
+	}
+	
+	@GetMapping
+	public List<VideoDto> listar(){
+		return service.listar();
 	}
 }
