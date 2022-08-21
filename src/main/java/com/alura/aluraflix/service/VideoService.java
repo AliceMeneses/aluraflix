@@ -41,4 +41,9 @@ public class VideoService {
 		video = repository.save(video);
 		return new VideoDto(video);
 	}
+	
+	public void deletar(Long id) {
+		Video video = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe o vídeo de código" + id));
+		repository.delete(video);
+	}
 }
