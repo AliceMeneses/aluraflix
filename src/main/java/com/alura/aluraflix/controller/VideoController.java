@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -48,6 +49,16 @@ public class VideoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public VideoDto salvar(@RequestBody @Valid VideoInput videoInput) {
 		return service.salvar(videoInput);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<VideoDto> atualizar(@PathVariable Long id,@RequestBody @Valid VideoInput videoInput) {
+		try {
+			VideoDto videoDto =  service.atualizar(id, videoInput);
+			return ResponseEntity.ok(videoDto);
+		} catch(EntidadeNaoEncontradaException ex) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 }

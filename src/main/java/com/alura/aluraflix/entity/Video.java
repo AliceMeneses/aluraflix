@@ -9,10 +9,12 @@ import javax.persistence.Table;
 import com.alura.aluraflix.dto.input.VideoInput;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "videos")
+@NoArgsConstructor
 @Getter @Setter
 public class Video {
 

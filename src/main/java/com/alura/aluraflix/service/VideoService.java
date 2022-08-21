@@ -3,6 +3,7 @@ package com.alura.aluraflix.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class VideoService {
 
 	public VideoDto buscar(Long id) {
 		Video video = repository.findById(id)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe vídeo de código " + id));
+				.orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe o vídeo de código " + id));
 
 		return new VideoDto(video);
 	}
@@ -31,6 +32,13 @@ public class VideoService {
 	
 	public VideoDto salvar(VideoInput videoInput) {
 		Video video = repository.save(new Video(videoInput));
+		return new VideoDto(video);
+	}
+	
+	public VideoDto atualizar(Long id, VideoInput videoInput) {
+		Video video = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe o vídeo de código" + id));
+		BeanUtils.copyProperties(videoInput, video);
+		video = repository.save(video);
 		return new VideoDto(video);
 	}
 }
