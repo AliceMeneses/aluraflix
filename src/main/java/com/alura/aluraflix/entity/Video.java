@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.alura.aluraflix.dto.input.VideoInput;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,4 +23,9 @@ public class Video {
 	private String descricao;
 	private String url;
 	
+	public Video(VideoInput videoInput) {
+		titulo = videoInput.getTitulo();
+		descricao = videoInput.getDescricao();
+		url = videoInput.getUrl();
+	}
 }
