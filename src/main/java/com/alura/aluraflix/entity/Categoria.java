@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.alura.aluraflix.dto.input.CategoriaInput;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,4 +22,7 @@ public class Categoria {
 	private String titulo;
 	private String cor;
 	
+	public Categoria(CategoriaInput categoriaInput) {
+		// TODO Auto-generated constructor stub
+	}
 }
