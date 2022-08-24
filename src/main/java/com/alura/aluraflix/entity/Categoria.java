@@ -1,9 +1,12 @@
 package com.alura.aluraflix.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.alura.aluraflix.dto.input.CategoriaInput;
@@ -22,7 +25,12 @@ public class Categoria {
 	private String titulo;
 	private String cor;
 	
+	@OneToMany(mappedBy = "categoria")
+	private List<Video> videos;
+	
 	public Categoria(CategoriaInput categoriaInput) {
-		// TODO Auto-generated constructor stub
+		titulo = categoriaInput.getTitulo();
+		cor = categoriaInput.getCor();
 	}
+	
 }

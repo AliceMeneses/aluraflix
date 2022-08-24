@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.alura.aluraflix.dto.input.VideoInput;
@@ -24,6 +25,9 @@ public class Video {
 	private String titulo;
 	private String descricao;
 	private String url;
+	
+	@ManyToOne
+	private Categoria categoria;
 	
 	public Video(VideoInput videoInput) {
 		titulo = videoInput.getTitulo();
