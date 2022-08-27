@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,4 +50,15 @@ public class CategoriaController {
 	public CategoriaDto salvar(@RequestBody @Valid CategoriaInput categoriaInput) {
 		return service.salvar(categoriaInput);
 	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<CategoriaDto> atualizar(@PathVariable Long id, @RequestBody @Valid CategoriaInput categoriaInput) {
+		try {
+			CategoriaDto categoria = service.atualizar(id, categoriaInput);
+			return ResponseEntity.ok(categoria);
+		} catch (EntidadeNaoEncontradaException ex) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
 }

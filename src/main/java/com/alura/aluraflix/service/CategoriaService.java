@@ -3,6 +3,7 @@ package com.alura.aluraflix.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +24,19 @@ public class CategoriaService {
 	}
 	
 	public CategoriaDto buscar(Long id) {
-		Categoria categoria = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe o vídeo de código " + id));
+		Categoria categoria = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe a categoria de código " + id));
 		return new CategoriaDto(categoria);
 	}
 	
 	public CategoriaDto salvar(CategoriaInput categoriaInput) {
 		Categoria categoria = repository.save(new Categoria(categoriaInput));
+		return new CategoriaDto(categoria);
+	}
+	
+	public CategoriaDto atualizar(Long id, CategoriaInput categoriaInput) {
+		Categoria categoria = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe a categoria de código " + id));
+		BeanUtils.copyProperties(categoriaInput, categoria);
+		categoria = repository.save(categoria);
 		return new CategoriaDto(categoria);
 	}
 }
