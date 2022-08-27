@@ -39,4 +39,9 @@ public class CategoriaService {
 		categoria = repository.save(categoria);
 		return new CategoriaDto(categoria);
 	}
+	
+	public void deletar(Long id) {
+		Categoria categoria = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe a categoria de código " + id));
+		repository.delete(categoria);
+	}
 }
