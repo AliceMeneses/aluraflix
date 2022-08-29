@@ -18,6 +18,11 @@ public class VideoService {
 
 	@Autowired
 	private VideoRepository repository;
+	
+	public List<VideoDto> buscarPorNome(String search) {
+		List<Video> videos = repository.findByTituloContaining(search);
+		return videos.stream().map(VideoDto::new).collect(Collectors.toList());
+	}
 
 	public VideoDto buscar(Long id) {
 		Video video = repository.findById(id)
