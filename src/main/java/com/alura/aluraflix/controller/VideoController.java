@@ -53,7 +53,7 @@ public class VideoController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<VideoDto> atualizar(@PathVariable Long id,@RequestBody @Valid VideoInput videoInput) {
+	public ResponseEntity<VideoDto> atualizar(@PathVariable Long id, @RequestBody @Valid VideoInput videoInput) {
 		try {
 			VideoDto videoDto =  service.atualizar(id, videoInput);
 			return ResponseEntity.ok(videoDto);

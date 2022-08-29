@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alura.aluraflix.dto.CategoriaDto;
+import com.alura.aluraflix.dto.VideosPorCategoriaDto;
 import com.alura.aluraflix.dto.input.CategoriaInput;
 import com.alura.aluraflix.entity.Categoria;
 import com.alura.aluraflix.exception.EntidadeNaoEncontradaException;
@@ -26,6 +27,11 @@ public class CategoriaService {
 	public CategoriaDto buscar(Long id) {
 		Categoria categoria = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe a categoria de código " + id));
 		return new CategoriaDto(categoria);
+	}
+	
+	public VideosPorCategoriaDto buscarVideosPorCategoria(Long id) {
+		Categoria categoria = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe a categoria de código " + id));
+		return new VideosPorCategoriaDto(categoria);
 	}
 	
 	public CategoriaDto salvar(CategoriaInput categoriaInput) {

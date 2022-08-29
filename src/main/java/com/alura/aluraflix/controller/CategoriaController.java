@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alura.aluraflix.dto.CategoriaDto;
+import com.alura.aluraflix.dto.VideosPorCategoriaDto;
 import com.alura.aluraflix.dto.input.CategoriaInput;
 import com.alura.aluraflix.exception.EntidadeNaoEncontradaException;
 import com.alura.aluraflix.service.CategoriaService;
@@ -28,7 +29,7 @@ public class CategoriaController {
 
 	@Autowired
 	private CategoriaService service;
-
+	
 	@GetMapping
 	public List<CategoriaDto> listar() {
 		return service.listar();
@@ -44,6 +45,16 @@ public class CategoriaController {
 			return ResponseEntity.notFound().build();
 		}
 
+	}
+	
+	@GetMapping("/{id}/videos")
+	public ResponseEntity<VideosPorCategoriaDto> buscarVideosPorCategoria(@PathVariable Long id){
+		try {
+			VideosPorCategoriaDto videoPorCategoriaDto = service.buscarVideosPorCategoria(id);
+			return ResponseEntity.ok(videoPorCategoriaDto);
+		} catch (EntidadeNaoEncontradaException ex) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 	@PostMapping
